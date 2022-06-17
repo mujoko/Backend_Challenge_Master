@@ -1,11 +1,48 @@
 ## Run locally
 
 - Start postgres
-- Prepare environment, fill DB parameters:
+- Prepare environment, change the value POSTGRES_URL at .env file base on your DB
+- execute schema.sql to create schema
 
-``` bash
-$ source env-sample
+## Points to Highlight
+- Usage of [Chi](https://github.com/go-chi/chi) as the Router.
+- Usage of [Zerolog](https://github.com/rs/zerolog) as the Logger.
+
+## Design Decisions & Project Folder Structure
+- Store config related files inside the `config` folder.
+- Store model inside the `model` folder.
+- Store API handler  inside the `controller` folder.
+- Store route inside the `router` folder.
+- Store logger inside the `util` folder. This folder can be extended for other utility file
+- Store handler logger inside the `requestlog` folder. 
+- Store main application code at project root level
+
 ```
+.
+├── LICENSE
+├── README.md
+├── config
+│   └── config.go
+├── controller
+│   └── stock.go
+├── go.mod
+├── go.sum
+├── main.go
+├── main_test.go
+├── models
+│   └── models.go
+├── requestlog
+│   ├── handler.go
+│   └── log_entry.go
+├── router
+│   └── router.go
+├── schema.sql
+└── util
+    └── logger
+        └── logger.go
+```
+
+
 
 - Build and run:
 
@@ -13,33 +50,12 @@ $ source env-sample
 $ export GO111MODULE=on
 $ export GOFLAGS=-mod=vendor
 $ go mod download
-$ go build -o go-mux-api.bin
-$ ./go-mux-api.bin
+$ go run .
+$ 
 ```
-
-Server is listening on localhost:8010
-
+ 
 ## Test
-
-```bash
-$ go test -v
-=== RUN   TestEmptyTable
---- PASS: TestEmptyTable (0.00s)
-=== RUN   TestGetNonExistentProduct
---- PASS: TestGetNonExistentProduct (0.00s)
-=== RUN   TestCreateProduct
---- PASS: TestCreateProduct (0.00s)
-=== RUN   TestGetProduct
---- PASS: TestGetProduct (0.00s)
-=== RUN   TestUpdateProduct
---- PASS: TestUpdateProduct (0.01s)
-=== RUN   TestDeleteProduct
---- PASS: TestDeleteProduct (0.01s)
-PASS
-ok      _/home/tom/r/go-mux-api 0.034s
-```
+ 
 
 ## License
-
-If I got Accepted to Work, then you can keep this
-else the licence for this I put as Apache
+ 

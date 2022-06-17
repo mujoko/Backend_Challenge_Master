@@ -32,7 +32,7 @@ func AppConfig() *Conf {
 
 	if err != nil {
 		logger.Info().Msgf("Error loading .env file")
-	}http.ListenAndServe(":8080", nil)
+	}
 
 	var c Conf
 	if err := envdecode.StrictDecode(&c); err != nil {
