@@ -88,7 +88,7 @@ func (p *pg) UpdateDetails(ctx context.Context, in *objects.UpdateDetailsRequest
 		IsActive:     in.IsActive,
 		UpdatedOn:    p.db.NowFunc(),
 	}
-
+	log.Println(evt)
 	return p.db.WithContext(ctx).Model(evt).
 		Select("id", "name", "price", "availability", "is_active", "updated_on").
 		Updates(evt).

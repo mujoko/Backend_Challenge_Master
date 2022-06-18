@@ -8,8 +8,8 @@
 - Store logger inside the `util` folder. This folder can be extended for other utility file
 - Docker and docker compose are at the project root level
 - Store main application code at project root level
-
-`.
+```
+.
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
@@ -93,9 +93,9 @@ http://localhost:8080/api/v1/stock/details{
 ###
 ```
 
-**List at max 42 events after the event: 20200828011748**
+**List at max 42 **
 ```http request
-GET http://localhost:8080/api/v1/stock?limit=42&after=20200828011748
+GET http://localhost:8080/api/v1/stock?limit=10
 Accept: application/json
 ###
 ```
