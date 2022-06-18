@@ -1,34 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"go-inventory/config"
-	"go-inventory/router"
-	lr "go-inventory/util/logger"
-	"net/http"
+	"log"
+	"os"
 )
 
 func main() {
-
-	appConf := config.AppConfig()
-	address := fmt.Sprintf(":%d", appConf.Server.Port)
-
-	logger := lr.New(appConf.Debug)
-
-	r := router.New()
-	// log.Printf("Starting server %s\n", address)
-	logger.Info().Msgf("Starting server %v", address)
-
-	s := &http.Server{
-		Addr:         address,
-		Handler:      r,
-		ReadTimeout:  appConf.Server.TimeoutRead,
-		WriteTimeout: appConf.Server.TimeoutWrite,
-		IdleTimeout:  appConf.Server.TimeoutIdle,
+	args := Args{
+		conn: "postgres://postgres:@localhost:5432/postgres?sslmode=disable",
+		port: ":8080",
 	}
-
-	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		logger.Fatal().Err(err).Msg("Server startup failed")
+	if conn := os.Getenv("DB_CONN"); conn != "" {
+		args.conn = conn
 	}
-
+	if port := os.Getenv("PORT"); port != "" {
+		args.port = ":" + port
+	}
+	// run server
+	if err := Run(args); err != nil {
+		log.Println(err)
+	}
 }

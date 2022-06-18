@@ -1,12 +1,5 @@
-## Run locally
-
-- Start postgres
-- Prepare environment, change the value POSTGRES_URL at .env file base on your DB
-- execute schema.sql to create schema
-
 ## Points to Highlight
-- Usage of [Chi](https://github.com/go-chi/chi) as the Router.
-- Usage of [Zerolog](https://github.com/rs/zerolog) as the Logger.
+- Usage of [Gorm](https://pkg.go.dev/gorm.io/gorm@v1.23.6) as the ORM.
 
 ## Design Decisions & Project Folder Structure
 - Store config related files inside the `config` folder.
@@ -44,7 +37,12 @@
 
 
 
-- Build and run:
+## Run locally
+### without docker compose
+- Start postgres
+- Prepare environment, change the value POSTGRES_URL at .env file base on your DB
+- execute schema.sql to create schema
+- Build and run
 
 ```bash
 $ export GO111MODULE=on
@@ -53,9 +51,10 @@ $ go mod download
 $ go run .
 $ 
 ```
- 
-## Test
- 
+### without docker compose
+```bash
+$ docker-compose up --build
+``` 
 
 ## License
  
