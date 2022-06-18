@@ -35,11 +35,6 @@ type UpdateDetailsRequest struct {
 	IsActive     bool    `json:"is_active"`
 }
 
-// CancelRequest to cancel an Stock
-type CancelRequest struct {
-	ID string `json:"id"`
-}
-
 // DeleteRequest to delete an Stock
 type DeleteRequest struct {
 	ID string `json:"id"`

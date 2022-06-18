@@ -51,7 +51,6 @@ $ export GO111MODULE=on
 $ export GOFLAGS=-mod=vendor
 $ go mod download
 $ go run .
-$ 
 ```
 ### without docker compose
 ```bash
