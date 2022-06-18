@@ -17,7 +17,7 @@ type pg struct {
 	db *gorm.DB
 }
 
-// NewPostgresStockStore returns a postgres implementation of Event store
+// NewPostgresStockStore returns a postgres implementation of Stock store
 func NewPostgresStockStore(conn string) IStockStore {
 	// create database connection
 	db, err := gorm.Open(postgres.Open(conn),
