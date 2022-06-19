@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// Stock object for the API
 type Stock struct {
 	// Identifier
 	ID string `gorm:"primary_key" json:"id,omitempty"`

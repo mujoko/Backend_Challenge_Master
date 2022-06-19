@@ -37,7 +37,26 @@
         └── logger.go
 ```
 
+
+
 ### Rest api
+**Object: Stock**
+```go
+// Stock object for the API
+type Stock struct {
+	// Identifier
+	ID string `gorm:"primary_key" json:"id,omitempty"`
+
+	// General details
+	Name  string  `json:"name,omitempty"`
+	Price float64 `json:"price,omitempty"`
+
+	Availability int       `json:"availability,omitempty"`
+	IsActive     bool      `json:"is_active,omitempty"`
+	CreatedOn    time.Time `json:"created_on,omitempty"`
+	UpdatedOn    time.Time `json:"updated_on,omitempty"`
+}
+```
 
 ## Run locally
 ### without docker compose
@@ -58,7 +77,7 @@ $ docker-compose up --build
 
 ### Rest api
 
-**Create an Stock**
+**Create A Stock**
 ```http request
 POST http://localhost:8080/api/v1/stock
 Content-Type: application/json
@@ -72,14 +91,14 @@ Content-Type: application/json
 ###
 ```
 
-**Get event**
+**Get Stock**
 ```http request
 GET http://localhost:8080/api/v1/stock/1655536052-0638474600-5197384620
 Accept: application/json
 ###
 ```
 
-**Update event's general details**
+**Update Stock's general details**
 ```http request
 http://localhost:8080/api/v1/stock/details{
     "id": "1655536052-0638474600-5197384620",
@@ -92,9 +111,9 @@ http://localhost:8080/api/v1/stock/details{
 ###
 ```
 
-**List at max 42 **
+**List at max 42**
 ```http request
-GET http://localhost:8080/api/v1/stock?limit=10
+GET http://localhost:8080/api/v1/stocks?limit=10
 Accept: application/json
 ###
 ```
