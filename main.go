@@ -6,6 +6,10 @@ import (
 )
 
 func main() {
+
+	// var abc string = "ABC"
+	// fmt.Print(abc)
+
 	args := Args{
 		conn: "postgres://postgres:root@localhost/dana?sslmode=disable",
 		port: ":8080",

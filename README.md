@@ -42,8 +42,7 @@
 ## Run locally
 ### without docker compose
 - Start postgres
-- Prepare environment, change the value POSTGRES_URL at .env file base on your DB
-- execute schema.sql to create schema
+- change file main.go to change the connection to DB or Prepare environment, change the value DB_CONN at .env file base on your DB  
 - Build and run
 
 ```bash

@@ -31,7 +31,7 @@ var (
 func TestMain(t *testing.M) {
 	log.Println("Registering")
 
-	conn := "postgres://user:password@localhost:5432/db?sslmode=disable"
+	conn := "postgres://postgres:root@localhost/test?sslmode=disable"
 	if c := os.Getenv("DB_CONN"); c != "" {
 		conn = c
 	}
@@ -134,7 +134,7 @@ func TestGetEndpoint(t *testing.T) {
 			name: "OK",
 			setup: func(t *testing.T) *http.Request {
 				evt := createOne(t, "Ok")
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/event?id="+evt.ID, nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock?id="+evt.ID, nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -145,7 +145,7 @@ func TestGetEndpoint(t *testing.T) {
 		{
 			name: "NotFound",
 			setup: func(t *testing.T) *http.Request {
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/event?id=32", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock?id=32", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -156,7 +156,7 @@ func TestGetEndpoint(t *testing.T) {
 		{
 			name: "WithoutParameter",
 			setup: func(t *testing.T) *http.Request {
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/event", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -187,7 +187,7 @@ func TestListEndpoint(t *testing.T) {
 			name: "Zero",
 			setup: func(t *testing.T) *http.Request {
 				flushAll(t)
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/events", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stocks", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -201,7 +201,7 @@ func TestListEndpoint(t *testing.T) {
 			setup: func(t *testing.T) *http.Request {
 				_ = createOne(t, "One")
 				_ = createOne(t, "Two")
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/events", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stocks", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -214,7 +214,7 @@ func TestListEndpoint(t *testing.T) {
 			name: "Limited",
 			setup: func(t *testing.T) *http.Request {
 				_ = createOne(t, "Three")
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/events?limit=2", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock?limit=2", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -228,7 +228,7 @@ func TestListEndpoint(t *testing.T) {
 			setup: func(t *testing.T) *http.Request {
 				evt := createOne(t, "Four")
 				_ = createOne(t, "Five")
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/events?after="+evt.ID, nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock?after="+evt.ID, nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -240,7 +240,7 @@ func TestListEndpoint(t *testing.T) {
 		{
 			name: "Name",
 			setup: func(t *testing.T) *http.Request {
-				req, err := http.NewRequest(http.MethodGet, "/api/v1/events?name=e", nil)
+				req, err := http.NewRequest(http.MethodGet, "/api/v1/stock?name=e", nil)
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -290,7 +290,7 @@ func TestCreateEndpoint(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			req, err := http.NewRequest(http.MethodPost, "/api/v1/event", bytes.NewReader(b))
+			req, err := http.NewRequest(http.MethodPost, "/api/v1/stock", bytes.NewReader(b))
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -330,7 +330,7 @@ func TestUpdateDetailsEndpoint(t *testing.T) {
 				t.Fatal(err)
 			}
 		}
-		req, err := http.NewRequest(http.MethodPut, "/api/v1/event/details", bytes.NewReader(b))
+		req, err := http.NewRequest(http.MethodPut, "/api/v1/stock/details", bytes.NewReader(b))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -399,7 +399,7 @@ func TestDeleteEndpoint(t *testing.T) {
 		if in != nil {
 			id = in.ID
 		}
-		req, err := http.NewRequest(http.MethodDelete, "/api/v1/event?id="+id, nil)
+		req, err := http.NewRequest(http.MethodDelete, "/api/v1/stock?id="+id, nil)
 		if err != nil {
 			t.Fatal(err)
 		}

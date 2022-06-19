@@ -56,5 +56,5 @@ func RegisterAllRoutes(router *mux.Router, hnd handlers.IStockHandler) {
 	router.HandleFunc("/stock/details", hnd.UpdateDetails).Methods(http.MethodPut)
 
 	// list stock
-	router.HandleFunc("/stock", hnd.List).Methods(http.MethodGet)
+	router.HandleFunc("/stocks", hnd.List).Methods(http.MethodGet)
 }

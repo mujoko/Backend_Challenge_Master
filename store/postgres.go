@@ -74,6 +74,7 @@ func (p *pg) Create(ctx context.Context, in *objects.CreateRequest) error {
 	}
 	in.Stock.ID = GenerateUniqueID()
 	in.Stock.CreatedOn = p.db.NowFunc()
+	in.Stock.UpdatedOn = p.db.NowFunc()
 	return p.db.WithContext(ctx).
 		Create(in.Stock).
 		Error
