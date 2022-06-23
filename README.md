@@ -82,7 +82,7 @@ $ docker-compose up --build
 POST http://localhost:8080/api/v1/stock
 Content-Type: application/json
 
-{{
+{
     "name":"Test",
     "price":1,
     "availability":3,
@@ -100,7 +100,8 @@ Accept: application/json
 
 **Update Stock's general details**
 ```http request
-http://localhost:8080/api/v1/stock/details{
+http://localhost:8080/api/v1/stock/details 
+{
     "id": "1655536052-0638474600-5197384620",
     "name":"Test",
     "price":1,
