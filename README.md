@@ -70,7 +70,7 @@ $ export GOFLAGS=-mod=vendor
 $ go mod download
 $ go run .
 ```
-### without docker compose
+### with docker compose
 ```bash
 $ docker-compose up --build
 ``` 
@@ -111,7 +111,7 @@ http://localhost:8080/api/v1/stock/details{
 ###
 ```
 
-**List at max 42**
+**List at max 10 records**
 ```http request
 GET http://localhost:8080/api/v1/stocks?limit=10
 Accept: application/json
